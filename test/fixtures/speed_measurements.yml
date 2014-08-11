@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  up: 9.99
+  down: 9.99
+
+two:
+  up: 9.99
+  down: 9.99

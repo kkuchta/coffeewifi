@@ -1,0 +1,22 @@
+.spinner
+  Thinking...
+.content.hidden
+  %h1 New speed_measurement
+
+  %form#location-search
+    %input.query{type: 'text', placeholder:'Search shops near me...'}
+    %input{type: 'submit'}
+
+  %ul#search-results
+  #selected-business
+  %form#final-form.hidden
+    %p
+      %label Up speed
+      %input.up{type:'text'}
+    %p
+      %label Down speed
+      %input.down{type:'text'}
+    %p
+      %input{type: 'submit'}
+.no-geo.hidden
+  Error geting geo io.  If you didn't allow permission, could you please do so?  That's kinda how this whole thing works.

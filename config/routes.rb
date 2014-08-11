@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :speed_measurements do
+    collection do
+      get 'search_location'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

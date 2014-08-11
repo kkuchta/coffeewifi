@@ -1,0 +1,21 @@
+%h1 Listing speed_measurements
+
+%table
+  %tr
+    %th Up
+    %th Down
+    %th
+    %th
+    %th
+
+  - @speed_measurements.each do |speed_measurement|
+    %tr
+      %td= speed_measurement.up
+      %td= speed_measurement.down
+      %td= link_to 'Show', speed_measurement
+      %td= link_to 'Edit', edit_speed_measurement_path(speed_measurement)
+      %td= link_to 'Destroy', speed_measurement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Speed measurement', new_speed_measurement_path

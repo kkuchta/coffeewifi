@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Up:
+  = @speed_measurement.up
+%p
+  %b Down:
+  = @speed_measurement.down
+
+= link_to 'Edit', edit_speed_measurement_path(@speed_measurement)
+\|
+= link_to 'Back', speed_measurements_path
