@@ -1,0 +1,12 @@
+%h1= @business.yelp_id
+
+Measurements:
+%ul
+  - @business.speed_measurements.each do |speed_measurement|
+    %li
+      up:
+      = speed_measurement.up
+      down:
+      = speed_measurement.down
+      date:
+      = speed_measurement.created_at.to_date

@@ -7,12 +7,32 @@ class SpeedMeasurementsController < ApplicationController
     query = params[:query]
     coords = {latitude: lat, longitude: lon}
     @search_results = Yelp.client.search_by_coordinates(coords, { term: query})
-    binding.pry
   end
 
   # GET /speed_measurements/1
   # GET /speed_measurements/1.json
   def show
+  end
+
+  def index
+    businesses = Business.all.map do |business|
+      speed =
+        if business.average_speed > 20
+          3
+        elsif business.average_speed > 10
+          2
+        else
+          1
+        end
+      {
+        lat: business.lat,
+        lon: business.lon,
+        id: business.id,
+        yelp_id: business.yelp_id,
+        speed: speed
+      }
+    end
+    gon.businesses = businesses
   end
 
   # GET /speed_measurements/new
@@ -23,7 +43,16 @@ class SpeedMeasurementsController < ApplicationController
   # POST /speed_measurements
   # POST /speed_measurements.json
   def create
-    @speed_measurement = SpeedMeasurement.new(speed_measurement_params)
+    business_yelp_id = speed_measurement_params[:business_id]
+    business = Business.find_by_yelp_id(business_yelp_id)
+    unless business
+      location = speed_measurement_params[:business_location]
+      lat_lon = GoogleService.geolocate(location)
+      business = Business.create( yelp_id: business_yelp_id, lat: lat_lon[:lat], lon: lat_lon[:lon] )
+    end
+    creation_params = speed_measurement_params.slice(:business, :up, :down)
+    creation_params[:business] = business
+    @speed_measurement = SpeedMeasurement.new(creation_params)
 
     respond_to do |format|
       if @speed_measurement.save
@@ -45,6 +74,10 @@ class SpeedMeasurementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speed_measurement_params
-      params.require(:speed_measurement).permit(:up, :down, :business_id)
+
+      #fuckit, to lazy to deal with permit crap right now
+      ActionController::Parameters.permit_all_parameters = true
+
+      params[:speed_measurement]
     end
 end

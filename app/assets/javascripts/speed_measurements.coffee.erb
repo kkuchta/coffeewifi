@@ -1,0 +1,90 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+window.setUpControls = ->
+  $('#location-search').submit onLocationSearchSubmit
+  $('#final-form').submit onFinalSubmit
+
+onLocationSearchSubmit = (e)->
+  e.preventDefault()
+  query = $('#location-search .query').val()
+  params =
+    lat: window.coords.latitude
+    lon: window.coords.longitude
+    query: query
+  $dfdGet = $.get('/speed_measurements/search_location', params)
+  $dfdGet.done (results) ->
+    $ul = $('#search-results')
+    for result in results
+      $li = $('<li class="result">')
+      $li.data id: result.id, location: result.location
+      $li.text result.name
+      $li.click(onResultClick)
+      $ul.append $li
+
+onFinalSubmit = (e) ->
+  e.preventDefault()
+  $form = $('#final-form')
+  params =
+    speed_measurement:
+      business_id: window.selectedId
+      business_location: window.selectedLocation
+      up: $form.find('.up').val()
+      down: $form.find('.down').val()
+  $dfdPost = $.post('/speed_measurements', params)
+  $dfdPost.done ->
+    alert( "Successfully saved speed measurement. Probably." )
+  $dfdPost.fail ->
+    alert( "Something went wrong saving speed measurement" )
+
+onResultClick = (e) ->
+  $result = $(e.target)
+  $('#search-results').hide()
+  window.selectedId = $result.data('id')
+  window.selectedLocation = $result.data('location')
+  $('#selected-business').text("Selected #{selectedId}").show()
+  $('#final-form').show()
+
+window.onGetPosition = (position)->
+  console.log "position = ", position
+  $('.content').show()
+  $('.spinner').hide()
+  window.coords = position.coords
+
+window.onErrorPosition = ->
+  $('.spinner').hide()
+  $('.no-geo').show()
+  console.log "zomg errz:", arguments
+
+window.setUpGoogleMap = (position)->
+  map = $('#main-map').get()[0]
+  coords = position.coords
+  console.log "Position=", coords
+  mapOptions =
+    center: new google.maps.LatLng(coords.latitude, coords.longitude),
+    zoom: 15
+  map = new google.maps.Map map, mapOptions
+
+  marker = new google.maps.Marker
+    position: new google.maps.LatLng(coords.latitude, coords.longitude),
+    map: map,
+    title:"Hello World!"
+    icon: '<%=image_path('man.png')%>'
+  speedIcons = {
+    3: '<%= image_path('wifi_high.png') %>',
+    2: '<%= image_path('wifi_medium.png') %>',
+    1: '<%= image_path('wifi_low.png') %>',
+  }
+
+  for business in gon.businesses
+    marker = new google.maps.Marker
+      position: new google.maps.LatLng(business.lat, business.lon),
+      map: map,
+      title:"Hello World!"
+      icon: speedIcons[business.speed]
+      business_id: business.id
+    google.maps.event.addListener marker, 'click', ->
+      location.href = "/businesses/#{business.id}"
+
+
