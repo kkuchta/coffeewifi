@@ -1,8 +1,10 @@
 - content_for :javascript do
+  = javascript_include_tag 'http://speedof.me/api/api.js'
   :coffee
     $ ->
       navigator.geolocation.getCurrentPosition(onGetPosition, onErrorPosition)
       setUpControls()
+      setUpSoM()
 .spinner
   Thinking...
 .content.hidden
@@ -14,14 +16,18 @@
 
   %ul#search-results
   #selected-business
+  %button#start-test.hidden Start Speed Test
+  #speed-test-in-progress.hidden
+    Speed testing...
+    %img{src: 'http://sierrafire.cr.usgs.gov/images/loading.gif', style:'width: 50px; height: 50px'}
   %form#final-form.hidden
     %p
       %label Up speed
-      %input.up{type:'text'}
+      %input.up{type:'text', disabled: true}
     %p
       %label Down speed
-      %input.down{type:'text'}
+      %input.down{type:'text', disabled: true}
     %p
-      %input{type: 'submit'}
+      %input{type: 'submit', disabled: true}
 .no-geo.hidden
   Error geting geo io.  If you didn't allow permission, could you please do so?  That's kinda how this whole thing works.

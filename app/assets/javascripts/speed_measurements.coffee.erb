@@ -5,6 +5,7 @@
 window.setUpControls = ->
   $('#location-search').submit onLocationSearchSubmit
   $('#final-form').submit onFinalSubmit
+  $('#start-test').click startTest
 
 onLocationSearchSubmit = (e)->
   e.preventDefault()
@@ -44,6 +45,7 @@ onResultClick = (e) ->
   window.selectedId = $result.data('id')
   window.selectedLocation = $result.data('location')
   $('#selected-business').text("Selected #{selectedId}").show()
+  $('#start-test').show()
   $('#final-form').show()
 
 window.onGetPosition = (position)->
@@ -77,14 +79,36 @@ window.setUpGoogleMap = (position)->
     1: '<%= image_path('wifi_low.png') %>',
   }
 
-  for business in gon.businesses
-    marker = new google.maps.Marker
+  $.each gon.businesses, (i,business) ->
+    business_marker = new google.maps.Marker
       position: new google.maps.LatLng(business.lat, business.lon),
       map: map,
-      title:"Hello World!"
+      title: business.yelp_id
       icon: speedIcons[business.speed]
       business_id: business.id
-    google.maps.event.addListener marker, 'click', ->
+    google.maps.event.addListener business_marker, 'click', ->
       location.href = "/businesses/#{business.id}"
 
 
+window.setUpSoM = ->
+  SomApi.account = "SOM53ef8788e193b"
+  SomApi.domainName = "beanspeed.com"
+  SomApi.config.sustainTime = 4
+  SomApi.onTestCompleted = onTestCompleted
+  SomApi.onError = onError
+
+window.startTest = ->
+  console.log "Starting test"
+  $('#speed-test-in-progress').show()
+  SomApi.startTest()
+
+window.onTestCompleted = (results) ->
+  $('#speed-test-in-progress').hide()
+  $form = $('#final-form')
+  $form.find('.up').val(results.upload)
+  $form.find('.down').val(results.download)
+  $form.find('[type="submit"]').prop(disabled: false)
+
+window.onError = ->
+  $('#speed-test-in-progress').hide()
+  alert("speed test error")

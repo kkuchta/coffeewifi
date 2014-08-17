@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :businesses, only: [:show]
 
+  # This is used by the mini speedtest plugin.
+  post '/mini/speedtest/upload.rb' => 'speedtest#upload'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
