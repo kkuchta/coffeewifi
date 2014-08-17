@@ -91,8 +91,15 @@ window.setUpGoogleMap = (position)->
 
 
 window.setUpSoM = ->
-  SomApi.account = "SOM53ef8788e193b"
-  SomApi.domainName = "beanspeed.com"
+  domain = document.domain
+  account = 
+    switch domain
+      when 'beanspeedtest.com' then 'SOM53efaf579e01e'
+      when 'floating-mountain-3389.herokuapp.com' then 'SOM53efb6e502080'
+      else 'SOM53ef8788e193b'
+
+  SomApi.account = account
+  SomApi.domainName = domain
   SomApi.config.sustainTime = 4
   SomApi.onTestCompleted = onTestCompleted
   SomApi.onError = onError

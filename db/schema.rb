@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140811043022) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "businesses", force: true do |t|
     t.decimal  "lat"
     t.decimal  "lon"

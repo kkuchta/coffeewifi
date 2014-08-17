@@ -1,6 +1,12 @@
 require 'yelp'
 
-yelp_dev_credentials = YAML.load_file("#{Rails.root}/config/yelp.yml")
+filename = "#{Rails.root}/config/yelp.yml"
+yelp_dev_credentials =
+  if File.exists?(filename)
+    YAML.load_file(filename)
+  else
+    {}
+  end
 
 Yelp.client.configure do |config|
   config.consumer_key = ENV['YELP_CONSUMER_KEY'] || yelp_dev_credentials['YELP_CONSUMER_KEY']
