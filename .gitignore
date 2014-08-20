@@ -18,3 +18,5 @@
 .DS_STORE
 
 /config/yelp.yml
+
+.ruby-version
