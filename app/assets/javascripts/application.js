@@ -10,8 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require hamlcoffee
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require namespaces
 //= require_tree .

@@ -1,6 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+# Let me be clear: this code is horrible.  Everything's global, it's a procedural
+# mess, error handling's a joke, there's no organization, variable names are
+# crap, etc etc
+#
+# This was thrown together in a couple hours to get a proof of concept working.
+# I'm leaving it here as a warning to others.  Well, ok, I'm using bits of it
+# as a reference while I rebuild it around a decent structure (using backbone
+# at the moment).
+#
+# Just don't get the wrong idea and think I think this is a good way to write
+# code.  :)
 
 window.setUpControls = ->
   $('#location-search').submit onLocationSearchSubmit
@@ -45,12 +53,12 @@ onResultClick = (e) ->
   window.selectedId = $result.data('id')
   window.selectedLocation = $result.data('location')
   $('#selected-business').text("Selected #{selectedId}").show()
-  $('#start-test').show()
-  $('#final-form').show()
+  $('#start-test').show().removeClass('hidden')
+  $('#final-form').show().removeClass('hidden')
 
 window.onGetPosition = (position)->
   console.log "position = ", position
-  $('.content').show()
+  $('.content').show().removeClass('hidden')
   $('.spinner').hide()
   window.coords = position.coords
 
@@ -106,7 +114,7 @@ window.setUpSoM = ->
 
 window.startTest = ->
   console.log "Starting test"
-  $('#speed-test-in-progress').show()
+  $('#speed-test-in-progress').show().removeClass('hidden')
   SomApi.startTest()
 
 window.onTestCompleted = (results) ->

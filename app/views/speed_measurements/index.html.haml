@@ -1,5 +1,4 @@
 - content_for :javascript do
-  = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDvfrF3Wxh_5lDf5r0hywLARFKz5F9x-WI'
   :coffee
     $ ->
       navigator.geolocation.getCurrentPosition(setUpGoogleMap)

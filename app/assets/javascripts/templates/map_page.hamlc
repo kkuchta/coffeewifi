@@ -1,0 +1,20 @@
+.navbar.navbar-default.navbar-fixed-bottom{role:'navigation'}
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand BeanSpeed
+      %button.btn.btn-default.navbar-btn.visible-xs.visible-sm
+        Measure Speed
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          %a{href:'#'}
+            Submit your coffeeshop!
+        %li.visible-sm.visible-xs
+          %button.btn.btn-default.navbar-btn{type: 'button'}
+            foobar
+      %p.navbar-text.navbar-right
+        Built by
+        %a.navbar-link{href:"http://kevinkuchta.com"} Kevin Kuchta
+        
+.map
+  map goes here

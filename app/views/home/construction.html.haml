@@ -1,4 +1,4 @@
 - HomeController::CONSTRUCTION_IMAGE_COUNT.times do
   - number = [(rand(HomeController::CONSTRUCTION_IMAGE_COUNT) + 1), 10].min
   - image = number.to_s + '.png'
-  %img{ src: image_path('construction/' + image) }
+  %img.construction{ src: image_path('construction/' + image) }

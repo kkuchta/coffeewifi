@@ -1,0 +1,29 @@
+class CoffeeWifi.MapView extends CoffeeWifi.View
+  template: 'map'
+
+  initialize: (options) ->
+    @location = options.location
+
+  afterRender: =>
+    mapEl = @$('.google-map').get()[0]
+
+    mapOptions =
+      center: new google.maps.LatLng(@location.latitude, @location.longitude),
+      zoom: 15
+
+    @googleMap = new google.maps.Map mapEl, mapOptions
+
+    # TODO: make this sane
+    speedIcons =
+      3: '<%= image_path('wifi_high.png') %>',
+      2: '<%= image_path('wifi_medium.png') %>',
+      1: '<%= image_path('wifi_low.png') %>',
+    $.each gon.businesses, (i,business) =>
+      business_marker = new google.maps.Marker
+        position: new google.maps.LatLng(business.lat, business.lon),
+        map: @googleMap,
+        title: business.yelp_id
+        icon: speedIcons[business.speed]
+        business_id: business.id
+      #google.maps.event.addListener business_marker, 'click', ->
+        #location.href = "/businesses/#{business.id}"
