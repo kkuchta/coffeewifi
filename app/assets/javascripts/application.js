@@ -14,7 +14,11 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+
+// Backbone requires underscore
 //= require underscore
 //= require backbone
+
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require namespaces
 //= require_tree .

@@ -1,0 +1,13 @@
+.container-fluid
+  .navbar-header
+    %a.navbar-brand BeanSpeed
+    %button.btn.btn-default.navbar-btn.visible-xs.visible-sm.submit-your-coffeeshop
+      Measure Speed
+  .collapse.navbar-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a.submit-your-coffeeshop{href:'#'}
+          Submit your coffeeshop!
+    %p.navbar-text.navbar-right
+      Built by
+      %a.navbar-link{href:"http://kevinkuchta.com"} Kevin Kuchta

@@ -1,0 +1,11 @@
+%form
+  .form-group
+    %label What shop are you at?
+    %input.business-name.input-lg.form-control{type: 'text', placeholder: _.sample(@placeholderShops)}
+  %button.btn.btn-default{type: 'submit'} Search
+- if @collection
+  %ul.business-list.list-unstyled
+    - @collection.each (business) =>
+      %li.business-search-row{ data: {'yelp-id' => business.get('yelp_id')} }
+        %h2.text-center
+          %a{href:'#'}= business.get('display_name')

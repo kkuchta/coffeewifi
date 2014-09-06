@@ -7,7 +7,11 @@ class CoffeeWifi.MapPageView extends CoffeeWifi.View
     super
 
   afterRender: =>
-    @$dfdPosition.done (location)=>
+    @$dfdPosition.done (location) =>
+      @navbar = new CoffeeWifi.Navbar
+        el: @$('.navbar')
+        location: location
+      @navbar.render()
       @map ||= new CoffeeWifi.MapView
         el: @$('.map')
         location: location

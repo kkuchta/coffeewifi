@@ -1,0 +1,3 @@
+%li.business-search-row{ data: {yelpId: @yelp_id} }
+  %h2.text-center
+    %a{href:'#'}= @display_name

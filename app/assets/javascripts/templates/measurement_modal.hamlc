@@ -1,0 +1,8 @@
+.modal-dialog.measurement-modal
+  .modal-content
+    .modal-header
+      %h4
+        Measure Your Coffeeshop
+    .modal-body
+      .spinner
+      .step.business-search

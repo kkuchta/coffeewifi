@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 20140811043022) do
   enable_extension "plpgsql"
 
   create_table "businesses", force: true do |t|
-    t.decimal  "lat"
-    t.decimal  "lon"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
     t.string   "yelp_id"
+    t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
