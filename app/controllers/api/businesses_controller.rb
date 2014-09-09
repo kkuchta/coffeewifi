@@ -1,4 +1,4 @@
-class Api::BusinessesController < ApplicationController
+class Api::BusinessesController < Api::ApiController
   def show
     #@business = Business.find(params[:id])
   end

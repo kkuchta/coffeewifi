@@ -17,6 +17,9 @@ Rails.application.routes.draw do
         get 'search_potentials'
       end
     end
+    resources :speed_measurements, only: [:create] do
+
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

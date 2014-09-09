@@ -18,7 +18,7 @@
 // Backbone requires underscore
 //= require underscore
 //= require backbone
+//= require spin.js
 
-//= require_tree ../../../vendor/assets/javascripts/.
 //= require namespaces
 //= require_tree .

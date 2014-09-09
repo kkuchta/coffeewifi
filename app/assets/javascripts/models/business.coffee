@@ -8,3 +8,11 @@ class CoffeeWifi.Business extends CoffeeWifi.Model
       models = _.map data.businesses, (business_data) ->
         new CoffeeWifi.Business(business_data)
       new CoffeeWifi.BusinessCollection(models)
+
+  # Create a new measurement model for this business
+  createMeasurement: (result) ->
+    new CoffeeWifi.SpeedMeasurement
+      upload: result.upload
+      download: result.download
+      latency: result.latency
+      business_yelp_id: @yelp_id

@@ -6,3 +6,20 @@
     .modal-body
       .spinner
       .step.business-search
+      .step.measure-speed.hidden
+        %table.table
+          %thead
+            %tr
+              %th.display-name
+          %tbody
+            %tr
+              %td Ping
+              %td.latency
+            %tr
+              %td Download
+              %td.download
+            %tr
+              %td Upload
+              %td.upload
+        %button.save-speed.btn.btn-lg.btn-default.hidden
+          Save Measurement
