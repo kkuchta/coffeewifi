@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20140811043022) do
   end
 
   create_table "speed_measurements", force: true do |t|
-    t.decimal  "up"
-    t.decimal  "down"
+    t.decimal  "upload"
+    t.decimal  "download"
+    t.integer  "latency"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "business_id"

@@ -15,4 +15,4 @@ class CoffeeWifi.Business extends CoffeeWifi.Model
       upload: result.upload
       download: result.download
       latency: result.latency
-      business_yelp_id: @yelp_id
+      business_yelp_id: @get('yelp_id')

@@ -40,8 +40,6 @@ class SpeedMeasurementsController < ApplicationController
     @speed_measurement = SpeedMeasurement.new
   end
 
-  # POST /speed_measurements
-  # POST /speed_measurements.json
   def create
     business_yelp_id = speed_measurement_params[:business_id]
     business = Business.find_by_yelp_id(business_yelp_id)
